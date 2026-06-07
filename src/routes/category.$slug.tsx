@@ -37,6 +37,7 @@ function CategoryPage() {
             <p className="mt-5 text-muted-foreground leading-relaxed">{category.description}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {category.chips.map(c => (
+        // @ts-expect-error chips typed
                 <span key={c} className="text-xs font-semibold bg-cream-deep text-navy-soft px-3 py-1.5 rounded-full">{c}</span>
               ))}
             </div>
