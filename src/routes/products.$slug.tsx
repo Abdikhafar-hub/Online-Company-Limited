@@ -54,7 +54,7 @@ function ProductPage() {
             <p className="text-sm text-whatsapp-dark font-semibold mt-2">In stock · Ready to ship countrywide</p>
             <p className="mt-5 text-muted-foreground leading-relaxed">{product.description}</p>
             <div className="mt-6 grid grid-cols-2 gap-3">
-              {product.specs.map(s => (
+              {product.specs.map((s: { label: string; value: string }) => (
                 <div key={s.label} className="bg-cream border border-beige-border rounded-xl p-3">
                   <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">{s.label}</div>
                   <div className="text-sm text-navy font-semibold mt-0.5">{s.value}</div>
