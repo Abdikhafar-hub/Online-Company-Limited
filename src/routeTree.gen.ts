@@ -9,38 +9,267 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RepairsRouteImport } from './routes/repairs'
+import { Route as QuoteRouteImport } from './routes/quote'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CctvSecurityRouteImport } from './routes/cctv-security'
+import { Route as BulkSupplyRouteImport } from './routes/bulk-supply'
+import { Route as BranchesRouteImport } from './routes/branches'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepairsRoute = RepairsRouteImport.update({
+  id: '/repairs',
+  path: '/repairs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuoteRoute = QuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CctvSecurityRoute = CctvSecurityRouteImport.update({
+  id: '/cctv-security',
+  path: '/cctv-security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BulkSupplyRoute = BulkSupplyRouteImport.update({
+  id: '/bulk-supply',
+  path: '/bulk-supply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BranchesRoute = BranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsSlugRoute = ProductsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const CategorySlugRoute = CategorySlugRouteImport.update({
+  id: '/category/$slug',
+  path: '/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/branches': typeof BranchesRoute
+  '/bulk-supply': typeof BulkSupplyRoute
+  '/cctv-security': typeof CctvSecurityRoute
+  '/contact': typeof ContactRoute
+  '/products': typeof ProductsRouteWithChildren
+  '/projects': typeof ProjectsRoute
+  '/quote': typeof QuoteRoute
+  '/repairs': typeof RepairsRoute
+  '/services': typeof ServicesRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/branches': typeof BranchesRoute
+  '/bulk-supply': typeof BulkSupplyRoute
+  '/cctv-security': typeof CctvSecurityRoute
+  '/contact': typeof ContactRoute
+  '/products': typeof ProductsRouteWithChildren
+  '/projects': typeof ProjectsRoute
+  '/quote': typeof QuoteRoute
+  '/repairs': typeof RepairsRoute
+  '/services': typeof ServicesRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/branches': typeof BranchesRoute
+  '/bulk-supply': typeof BulkSupplyRoute
+  '/cctv-security': typeof CctvSecurityRoute
+  '/contact': typeof ContactRoute
+  '/products': typeof ProductsRouteWithChildren
+  '/projects': typeof ProjectsRoute
+  '/quote': typeof QuoteRoute
+  '/repairs': typeof RepairsRoute
+  '/services': typeof ServicesRoute
+  '/category/$slug': typeof CategorySlugRoute
+  '/products/$slug': typeof ProductsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/branches'
+    | '/bulk-supply'
+    | '/cctv-security'
+    | '/contact'
+    | '/products'
+    | '/projects'
+    | '/quote'
+    | '/repairs'
+    | '/services'
+    | '/category/$slug'
+    | '/products/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/branches'
+    | '/bulk-supply'
+    | '/cctv-security'
+    | '/contact'
+    | '/products'
+    | '/projects'
+    | '/quote'
+    | '/repairs'
+    | '/services'
+    | '/category/$slug'
+    | '/products/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/branches'
+    | '/bulk-supply'
+    | '/cctv-security'
+    | '/contact'
+    | '/products'
+    | '/projects'
+    | '/quote'
+    | '/repairs'
+    | '/services'
+    | '/category/$slug'
+    | '/products/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BranchesRoute: typeof BranchesRoute
+  BulkSupplyRoute: typeof BulkSupplyRoute
+  CctvSecurityRoute: typeof CctvSecurityRoute
+  ContactRoute: typeof ContactRoute
+  ProductsRoute: typeof ProductsRouteWithChildren
+  ProjectsRoute: typeof ProjectsRoute
+  QuoteRoute: typeof QuoteRoute
+  RepairsRoute: typeof RepairsRoute
+  ServicesRoute: typeof ServicesRoute
+  CategorySlugRoute: typeof CategorySlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repairs': {
+      id: '/repairs'
+      path: '/repairs'
+      fullPath: '/repairs'
+      preLoaderRoute: typeof RepairsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quote': {
+      id: '/quote'
+      path: '/quote'
+      fullPath: '/quote'
+      preLoaderRoute: typeof QuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cctv-security': {
+      id: '/cctv-security'
+      path: '/cctv-security'
+      fullPath: '/cctv-security'
+      preLoaderRoute: typeof CctvSecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bulk-supply': {
+      id: '/bulk-supply'
+      path: '/bulk-supply'
+      fullPath: '/bulk-supply'
+      preLoaderRoute: typeof BulkSupplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/branches': {
+      id: '/branches'
+      path: '/branches'
+      fullPath: '/branches'
+      preLoaderRoute: typeof BranchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +277,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$slug': {
+      id: '/products/$slug'
+      path: '/$slug'
+      fullPath: '/products/$slug'
+      preLoaderRoute: typeof ProductsSlugRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/category/$slug': {
+      id: '/category/$slug'
+      path: '/category/$slug'
+      fullPath: '/category/$slug'
+      preLoaderRoute: typeof CategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface ProductsRouteChildren {
+  ProductsSlugRoute: typeof ProductsSlugRoute
+}
+
+const ProductsRouteChildren: ProductsRouteChildren = {
+  ProductsSlugRoute: ProductsSlugRoute,
+}
+
+const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
+  ProductsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BranchesRoute: BranchesRoute,
+  BulkSupplyRoute: BulkSupplyRoute,
+  CctvSecurityRoute: CctvSecurityRoute,
+  ContactRoute: ContactRoute,
+  ProductsRoute: ProductsRouteWithChildren,
+  ProjectsRoute: ProjectsRoute,
+  QuoteRoute: QuoteRoute,
+  RepairsRoute: RepairsRoute,
+  ServicesRoute: ServicesRoute,
+  CategorySlugRoute: CategorySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
