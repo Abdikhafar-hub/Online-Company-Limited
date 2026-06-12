@@ -54,8 +54,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         >
           <ArrowLeft className="h-4 w-4" /> Back to products
         </Link>
-        <div className="grid gap-10 rounded-3xl border border-beige-border bg-white p-6 md:p-10 lg:grid-cols-2">
-          <div className="aspect-square max-w-xl">
+        <div className="grid gap-6 rounded-3xl border border-beige-border bg-white p-4 sm:p-6 md:p-10 lg:grid-cols-2 lg:gap-10">
+          <div className="aspect-square w-full max-w-xl">
             <ProductVisual product={product} size="lg" />
           </div>
           <div>
@@ -65,16 +65,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h1 className="mt-2 text-3xl font-extrabold leading-tight text-navy md:text-4xl">
               {product.name}
             </h1>
-            <div className="mt-4 flex items-baseline gap-3">
+            <div className="mt-4 flex flex-wrap items-baseline gap-2 sm:gap-3">
               {product.requestPrice ? (
                 <span className="text-2xl font-bold text-navy">Request Price</span>
               ) : (
                 <>
-                  <span className="text-3xl font-extrabold text-navy">
+                  <span className="text-2xl font-extrabold text-navy sm:text-3xl">
                     {formatKES(product.price!)}
                   </span>
                   {product.oldPrice ? (
-                    <span className="text-base text-muted-foreground line-through">
+                    <span className="text-sm text-muted-foreground line-through sm:text-base">
                       {formatKES(product.oldPrice)}
                     </span>
                   ) : null}
@@ -85,7 +85,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {product.stockStatus} · Ready to ship countrywide
             </p>
             <p className="mt-5 leading-relaxed text-muted-foreground">{product.description}</p>
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {product.specs.map((spec) => (
                 <div
                   key={spec.label}
@@ -98,12 +98,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </div>
               ))}
             </div>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={wa}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-3 font-semibold text-white hover:bg-whatsapp-dark"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 font-semibold text-white hover:bg-whatsapp-dark sm:w-auto"
               >
                 <MessageCircle className="h-4 w-4" /> Order on WhatsApp
               </a>
@@ -111,12 +111,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 href={quoteMsg}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-navy/20 px-5 py-3 font-semibold text-navy"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-navy/20 px-5 py-3 font-semibold text-navy sm:w-auto"
               >
                 Request Quote
               </a>
             </div>
-            <div className="mt-6 flex gap-4 text-xs text-muted-foreground">
+            <div className="mt-6 flex flex-wrap gap-3 text-xs text-muted-foreground sm:gap-4">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4 text-whatsapp-dark" /> Genuine product
               </span>
@@ -134,7 +134,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       {related.length > 0 ? (
         <section className="container-page mt-12">
           <h2 className="mb-5 text-2xl font-extrabold text-navy">Related products</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5">
             {related.map((item) => (
               <ProductCard key={item.slug} product={item} />
             ))}

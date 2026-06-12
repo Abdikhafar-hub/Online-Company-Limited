@@ -1,7 +1,7 @@
 import type { Category, Product, Service } from "./site-data";
 
 export type RemoteImageAsset = {
-  src: string;
+  src: string | string[];
   alt: string;
   fallbackLabel: string;
 };
@@ -258,20 +258,73 @@ export function getCategoryImage(category: CategorySlug): RemoteImageAsset {
   return categoryImages[category];
 }
 
+function uniqueSources(...values: Array<string | undefined>) {
+  return Array.from(new Set(values.filter(Boolean))) as string[];
+}
+
 export function getProductImage(
-  product: Pick<Product, "slug" | "category" | "name" | "imageUrl">,
+  product: Pick<Product, "slug" | "category" | "name" | "imageUrl" | "galleryImages">,
 ): RemoteImageAsset {
-  const asset = product.imageUrl
-    ? {
-        src: product.imageUrl,
-        alt: `${product.name} product photo`,
-        fallbackLabel: product.name,
-      }
-    : (productImages[product.slug] ?? categoryImages[product.category as CategorySlug]);
+  const directSources = uniqueSources(product.imageUrl, ...(product.galleryImages ?? []));
+  const asset =
+    directSources.length > 0
+      ? {
+          src: directSources,
+          alt: `${product.name} product photo`,
+          fallbackLabel: product.name,
+        }
+      : (productImages[product.slug] ?? categoryImages[product.category as CategorySlug]);
   return {
     ...asset,
     fallbackLabel: product.name,
   };
+}
+
+export function getProductsHeroImage({
+  brand,
+  category,
+  products,
+  subcategory,
+}: {
+  brand?: string;
+  category?: string;
+  subcategory?: string;
+  products: Array<
+    Pick<
+      Product,
+      "slug" | "category" | "name" | "imageUrl" | "galleryImages" | "brand" | "subcategory"
+    >
+  >;
+}) {
+  const normalizedSubcategory = subcategory?.trim().toLowerCase();
+  const normalizedBrand = brand?.trim().toLowerCase();
+
+  const exactSubcategoryMatch = products.find(
+    (product) =>
+      normalizedSubcategory &&
+      product.subcategory.trim().toLowerCase() === normalizedSubcategory &&
+      (product.imageUrl || product.galleryImages?.length),
+  );
+  if (exactSubcategoryMatch) return getProductImage(exactSubcategoryMatch);
+
+  const exactBrandMatch = products.find(
+    (product) =>
+      normalizedBrand &&
+      product.brand.trim().toLowerCase() === normalizedBrand &&
+      (product.imageUrl || product.galleryImages?.length),
+  );
+  if (exactBrandMatch) return getProductImage(exactBrandMatch);
+
+  const firstProductWithImage = products.find(
+    (product) => product.imageUrl || product.galleryImages?.length,
+  );
+  if (firstProductWithImage) return getProductImage(firstProductWithImage);
+
+  if (category && category in categoryImages) {
+    return categoryImages[category as CategorySlug];
+  }
+
+  return pageHeroImages.products;
 }
 
 export function getServiceImage(service: Pick<Service, "slug" | "name">): RemoteImageAsset {

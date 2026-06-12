@@ -83,20 +83,20 @@ export function CatalogBrowser({
   return (
     <>
       <section className="container-page mt-6">
-        <div className="grid gap-3 rounded-3xl border border-beige-border bg-white p-5 md:grid-cols-[1.3fr_1fr_1fr_1fr_1fr] md:p-6">
-          <label className="flex items-center rounded-full border border-beige-border bg-cream px-4 py-2.5">
+        <div className="grid grid-cols-1 gap-3 rounded-3xl border border-beige-border bg-white p-4 md:grid-cols-2 md:p-6 xl:grid-cols-[1.35fr_1fr_1fr_1fr_1fr]">
+          <label className="flex min-w-0 items-center rounded-full border border-beige-border bg-cream px-4 py-2.5 xl:min-w-[14rem]">
             <Search className="h-4 w-4 text-muted-foreground" />
             <input
               value={q}
               onChange={(event) => setQ(event.target.value)}
               placeholder="Search products..."
-              className="flex-1 bg-transparent px-3 text-sm outline-none"
+              className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none"
             />
           </label>
           <select
             value={cat}
             onChange={(event) => setCat(event.target.value)}
-            className="rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
+            className="w-full min-w-0 rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
             disabled={lockCategory}
           >
             <option value="">All categories</option>
@@ -109,7 +109,7 @@ export function CatalogBrowser({
           <select
             value={brand}
             onChange={(event) => setBrand(event.target.value)}
-            className="rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
+            className="w-full min-w-0 rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
           >
             <option value="">All brands</option>
             {brands.map((brandName) => (
@@ -121,7 +121,7 @@ export function CatalogBrowser({
           <select
             value={subcategory}
             onChange={(event) => setSubcategory(event.target.value)}
-            className="rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
+            className="w-full min-w-0 rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
           >
             <option value="">All subcategories</option>
             {subcategories.map((subcategoryName) => (
@@ -133,7 +133,7 @@ export function CatalogBrowser({
           <select
             value={sort}
             onChange={(event) => setSort(event.target.value as CatalogSort)}
-            className="rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
+            className="w-full min-w-0 rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
           >
             <option value="latest">Latest</option>
             <option value="price-low">Price Low</option>
@@ -172,7 +172,7 @@ export function CatalogBrowser({
             </button>
           </div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5 xl:grid-cols-4">
             {pagination.items.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}

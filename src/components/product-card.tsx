@@ -7,42 +7,50 @@ import { ProductVisual } from "./product-visual";
 export function ProductCard({ product }: { product: Product }) {
   const wa = buildWhatsAppLink(product.whatsappInquiryText);
   return (
-    <article className="group bg-white rounded-3xl border border-beige-border overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(11,19,43,0.35)]">
-      <div className="p-4 pb-2">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-beige-border bg-white transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(11,19,43,0.35)] sm:rounded-3xl">
+      <div className="p-2.5 pb-1.5 sm:p-4 sm:pb-2">
         <div className="relative">
-          <span className="absolute z-10 top-2 left-2 text-[0.7rem] tracking-[0.16em] uppercase font-semibold bg-white/85 text-navy-soft px-2.5 py-1 rounded-full">
+          <span className="absolute top-2 left-2 z-10 rounded-full bg-white/90 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-navy-soft sm:px-2.5 sm:text-[0.7rem] sm:tracking-[0.16em]">
             {product.brand}
           </span>
-          <div className="aspect-square">
+          <div className="aspect-[4/3.8] sm:aspect-square">
             <ProductVisual product={product} />
           </div>
         </div>
       </div>
-      <div className="px-5 pb-5 pt-2 flex flex-col gap-2 flex-1">
-        <p className="kicker">{product.categoryLabel}</p>
-        <h3 className="text-lg font-bold leading-tight text-navy">{product.name}</h3>
-        <p className="text-xs font-semibold uppercase tracking-wide text-whatsapp-dark">
+      <div className="flex flex-1 flex-col gap-1.5 px-3 pb-3 pt-1.5 sm:gap-2 sm:px-5 sm:pb-5 sm:pt-2">
+        <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-brand-red sm:kicker">
+          {product.categoryLabel}
+        </p>
+        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-navy sm:text-lg sm:leading-tight">
+          {product.name}
+        </h3>
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-whatsapp-dark sm:text-xs">
           {product.stockStatus}
         </p>
-        <div className="flex items-baseline gap-2">
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 sm:gap-2">
           {product.requestPrice ? (
-            <span className="text-base font-semibold text-navy">Request Price</span>
+            <span className="text-sm font-semibold text-navy sm:text-base">Request Price</span>
           ) : (
             <>
-              <span className="text-xl font-extrabold text-navy">{formatKES(product.price!)}</span>
+              <span className="text-base font-extrabold text-navy sm:text-xl">
+                {formatKES(product.price!)}
+              </span>
               {product.oldPrice && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="text-[11px] text-muted-foreground line-through sm:text-sm">
                   {formatKES(product.oldPrice)}
                 </span>
               )}
             </>
           )}
         </div>
-        <p className="text-sm text-muted-foreground line-clamp-2">{product.shortSpec}</p>
-        <div className="mt-auto pt-4 flex items-center justify-between border-t border-beige-border">
+        <p className="line-clamp-2 text-[11px] leading-relaxed text-muted-foreground sm:text-sm">
+          {product.shortSpec}
+        </p>
+        <div className="mt-auto flex items-center justify-between gap-2 border-t border-beige-border pt-3 sm:pt-4">
           <Link
             href={`/products/${product.slug}`}
-            className="text-sm font-semibold text-navy underline-offset-4 hover:underline"
+            className="min-w-0 whitespace-nowrap text-xs font-semibold text-navy underline-offset-4 hover:underline sm:text-sm"
           >
             View details
           </Link>
@@ -50,9 +58,9 @@ export function ProductCard({ product }: { product: Product }) {
             href={wa}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-whatsapp hover:bg-whatsapp-dark text-white text-sm font-semibold transition-colors"
+            className="inline-flex shrink-0 items-center gap-1 rounded-full bg-whatsapp px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-whatsapp-dark sm:gap-1.5 sm:px-3.5 sm:py-2 sm:text-sm"
           >
-            <MessageCircle className="h-4 w-4" /> WhatsApp
+            <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> WhatsApp
           </a>
         </div>
       </div>

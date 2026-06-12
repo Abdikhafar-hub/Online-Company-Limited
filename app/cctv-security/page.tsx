@@ -25,7 +25,7 @@ export default function CctvSecurityPage() {
         We supply, install and maintain CCTV and IP camera systems for homes, businesses and
         institutions across Kenya.
       </PageHero>
-      <section className="container-page mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="container-page mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
         {[
           {
             image: cctvFeatureImages.cameras,
@@ -66,7 +66,7 @@ export default function CctvSecurityPage() {
       </section>
       <section className="container-page mt-10">
         <h2 className="mb-5 text-2xl font-extrabold text-navy">Featured CCTV products</h2>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5">
           {cctv.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}

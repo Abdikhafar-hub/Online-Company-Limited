@@ -33,14 +33,16 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="container-page flex items-center gap-6 py-4">
-        <Link href="/" className="flex shrink-0 items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-xl bg-navy text-cream">
-            <Monitor className="h-5 w-5" />
+      <div className="container-page flex items-center gap-3 py-3 md:gap-6 md:py-4">
+        <Link href="/" className="flex min-w-0 shrink items-center gap-2.5 md:shrink-0 md:gap-3">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-navy text-cream md:h-11 md:w-11">
+            <Monitor className="h-4.5 w-4.5 md:h-5 md:w-5" />
           </div>
-          <div className="leading-tight">
-            <div className="text-[15px] font-extrabold tracking-wide text-navy">ONLINE COMPANY</div>
-            <div className="text-[10px] font-semibold tracking-[0.22em] text-muted-foreground">
+          <div className="min-w-0 leading-tight">
+            <div className="truncate text-[13px] font-extrabold tracking-wide text-navy sm:text-[15px]">
+              ONLINE COMPANY
+            </div>
+            <div className="truncate text-[9px] font-semibold tracking-[0.18em] text-muted-foreground sm:text-[10px] sm:tracking-[0.22em]">
               LIMITED · KENYA
             </div>
           </div>
@@ -96,7 +98,7 @@ export function SiteHeader() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="ml-auto rounded-lg border border-beige-border p-2 lg:hidden"
+          className="ml-auto shrink-0 rounded-lg border border-beige-border p-2 lg:hidden"
           aria-label="Menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -167,100 +169,164 @@ export function SiteHeader() {
       </nav>
 
       {open ? (
-        <div className="border-t border-beige-border bg-cream lg:hidden">
-          <div className="container-page space-y-3 py-3">
-            <form
-              action="/products"
-              method="get"
-              className="flex items-center rounded-full border border-beige-border bg-white pl-3 pr-1 py-1"
-            >
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <input
-                name="q"
-                type="search"
-                placeholder="Search products..."
-                className="flex-1 bg-transparent px-3 py-2 text-sm outline-none"
-              />
-              <button
-                type="submit"
-                className="rounded-full bg-brand-red px-4 py-2 text-sm font-semibold text-white"
+        <div className="fixed inset-0 z-[60] grid h-[100dvh] grid-rows-[auto_auto_minmax(0,1fr)_auto] overflow-hidden bg-cream lg:hidden">
+          <div className="shrink-0 border-b border-beige-border bg-navy text-xs text-cream/90">
+            <div className="container-page py-2">We offer countrywide delivery</div>
+          </div>
+
+          <div className="shrink-0 border-b border-beige-border bg-cream">
+            <div className="container-page flex items-center justify-between gap-3 py-3">
+              <Link
+                href="/"
+                onClick={() => {
+                  setOpen(false);
+                  setMobileOpen(null);
+                }}
+                className="flex min-w-0 items-center gap-2.5"
               >
-                Go
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-navy text-cream">
+                  <Monitor className="h-4.5 w-4.5" />
+                </div>
+                <div className="min-w-0 leading-tight">
+                  <div className="truncate text-[13px] font-extrabold tracking-wide text-navy">
+                    ONLINE COMPANY
+                  </div>
+                  <div className="truncate text-[9px] font-semibold tracking-[0.18em] text-muted-foreground">
+                    LIMITED · KENYA
+                  </div>
+                </div>
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  setMobileOpen(null);
+                }}
+                className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-beige-border bg-white text-navy"
+                aria-label="Close menu"
+              >
+                <X className="h-4.5 w-4.5" />
               </button>
-            </form>
+            </div>
+          </div>
 
-            <div className="space-y-2">
-              {SHOP_NAV.map((item) => {
-                const active = isGroupActive(item.href, item.links);
-                const expanded = mobileOpen === item.label;
-
-                return (
-                  <div
-                    key={item.label}
-                    className="overflow-hidden rounded-2xl border border-beige-border bg-white"
+          <div className="min-h-0 overflow-y-auto overscroll-contain">
+            <div className="container-page py-4">
+              <form
+                action="/products"
+                method="get"
+                className="grid gap-2 rounded-2xl border border-beige-border bg-white p-3"
+              >
+                <select
+                  name="cat"
+                  className="h-11 w-full rounded-xl border border-beige-border bg-cream px-3 text-sm font-medium text-navy outline-none"
+                >
+                  <option value="">All Categories</option>
+                  {CATEGORIES.map((c) => (
+                    <option key={c.slug} value={c.slug}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+                <div className="grid grid-cols-[1fr_auto] gap-2">
+                  <label className="flex min-w-0 items-center rounded-xl border border-beige-border bg-cream px-3">
+                    <Search className="h-4 w-4 text-muted-foreground" />
+                    <input
+                      name="q"
+                      type="search"
+                      placeholder="Search products..."
+                      className="min-w-0 flex-1 bg-transparent px-2.5 py-2.5 text-sm outline-none"
+                    />
+                  </label>
+                  <button
+                    type="submit"
+                    className="h-11 rounded-xl bg-brand-red px-4 text-sm font-semibold text-white"
                   >
-                    <div className="flex items-center gap-2 p-2">
+                    Search
+                  </button>
+                </div>
+              </form>
+
+              <div className="mt-4 overflow-hidden rounded-2xl border border-beige-border bg-white">
+                {SHOP_NAV.map((item, index) => {
+                  const active = isGroupActive(item.href, item.links);
+                  const expanded = mobileOpen === item.label;
+
+                  return (
+                    <div key={item.label}>
                       <button
                         type="button"
                         onClick={() => setMobileOpen(expanded ? null : item.label)}
-                        className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold ${
-                          active ? "bg-cream text-whatsapp-dark" : "text-navy"
+                        className={`flex h-12 w-full items-center justify-between px-4 text-left ${
+                          active ? "text-whatsapp-dark" : "text-navy"
                         }`}
+                        aria-expanded={expanded}
+                        aria-controls={`mobile-menu-${item.label}`}
                       >
-                        {item.label}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setMobileOpen(expanded ? null : item.label)}
-                        className="rounded-xl border border-beige-border p-2 text-navy"
-                        aria-label={`Toggle ${item.label} menu`}
-                      >
+                        <span className="truncate pr-3 text-sm font-semibold">{item.label}</span>
                         {expanded ? (
-                          <ChevronUp className="h-4 w-4" />
+                          <ChevronUp className="h-4 w-4 shrink-0" />
                         ) : (
-                          <ChevronDown className="h-4 w-4" />
+                          <ChevronDown className="h-4 w-4 shrink-0" />
                         )}
                       </button>
-                    </div>
 
-                    {expanded ? (
-                      <div className="border-t border-beige-border px-2 pb-2 pt-1">
-                        <div className="grid gap-1">
-                          {item.links.map((link) => (
-                            <Link
-                              key={`${item.label}-${link.label}-${link.href}`}
-                              href={link.href}
-                              onClick={() => setOpen(false)}
-                              className={`rounded-xl px-3 py-2 text-sm ${
-                                isHrefActive(link.href)
-                                  ? "bg-cream text-whatsapp-dark"
-                                  : "text-muted-foreground hover:bg-cream hover:text-navy"
-                              }`}
-                            >
-                              {link.label}
-                            </Link>
-                          ))}
+                      {expanded ? (
+                        <div
+                          id={`mobile-menu-${item.label}`}
+                          className="border-t border-beige-border bg-cream/55 px-4 py-2"
+                        >
+                          <div className="grid">
+                            {item.links.map((link) => (
+                              <Link
+                                key={`${item.label}-${link.label}-${link.href}`}
+                                href={link.href}
+                                onClick={() => {
+                                  setOpen(false);
+                                  setMobileOpen(null);
+                                }}
+                                className={`py-2 pl-3 text-sm ${
+                                  isHrefActive(link.href)
+                                    ? "font-semibold text-whatsapp-dark"
+                                    : "text-navy-soft"
+                                }`}
+                              >
+                                {link.label}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
-            </div>
+                      ) : null}
 
-            <div className="flex gap-2 pt-2">
+                      {index < SHOP_NAV.length - 1 ? (
+                        <div className="mx-4 h-px bg-beige-border" />
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="shrink-0 border-t border-beige-border bg-cream">
+            <div className="container-page grid grid-cols-2 gap-2 py-3">
               <a
                 href={wa}
-                className="flex-1 rounded-full bg-whatsapp px-4 py-2.5 text-center text-sm font-semibold text-white"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-whatsapp px-3 text-center text-sm font-semibold text-white"
               >
                 WhatsApp
               </a>
               <Link
                 href="/quote"
-                onClick={() => setOpen(false)}
-                className="flex-1 rounded-full border border-navy/20 px-4 py-2.5 text-center text-sm font-semibold text-navy"
+                onClick={() => {
+                  setOpen(false);
+                  setMobileOpen(null);
+                }}
+                className="inline-flex h-11 items-center justify-center rounded-full border border-navy/20 px-3 text-center text-sm font-semibold text-navy"
               >
-                Quote
+                Request Quote
               </Link>
             </div>
           </div>

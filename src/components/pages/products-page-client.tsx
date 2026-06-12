@@ -3,8 +3,9 @@
 import { useMemo } from "react";
 import { CatalogBrowser } from "@/components/catalog-browser";
 import { PageHero, SiteLayout } from "@/components/site-layout";
-import { getCategoryBySlug } from "@/lib/catalog-service";
-import { pageHeroImages } from "@/lib/product-images";
+import { filterCatalogProducts, getCategoryBySlug } from "@/lib/catalog-service";
+import { getProductsHeroImage, pageHeroImages } from "@/lib/product-images";
+import { PRODUCTS } from "@/lib/site-data";
 
 export function ProductsPageClient({
   initialBrand = "",
@@ -18,6 +19,24 @@ export function ProductsPageClient({
   initialSubcategory?: string;
 }) {
   const activeCategory = useMemo(() => getCategoryBySlug(initialCategory), [initialCategory]);
+  const heroImage = useMemo(() => {
+    const filteredProducts = filterCatalogProducts(
+      {
+        brand: initialBrand,
+        category: initialCategory,
+        query: initialQuery,
+        subcategory: initialSubcategory,
+      },
+      PRODUCTS,
+    );
+
+    return getProductsHeroImage({
+      brand: initialBrand,
+      category: initialCategory,
+      products: filteredProducts,
+      subcategory: initialSubcategory,
+    });
+  }, [initialBrand, initialCategory, initialQuery, initialSubcategory]);
 
   const pageTitle = useMemo(() => {
     if (initialBrand && initialSubcategory) return `${initialBrand} ${initialSubcategory}`;
@@ -50,7 +69,7 @@ export function ProductsPageClient({
     <SiteLayout>
       <PageHero
         breadcrumb="Home / Products"
-        image={pageHeroImages.products}
+        image={heroImage ?? pageHeroImages.products}
         kicker="Catalog"
         title={pageTitle}
       >

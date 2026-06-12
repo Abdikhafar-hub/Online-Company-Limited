@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export function RemoteImage({
@@ -15,7 +15,7 @@ export function RemoteImage({
   sizes = "100vw",
   src,
 }: {
-  src?: string;
+  src?: string | string[];
   alt: string;
   fallbackLabel: string;
   sizes?: string;
@@ -24,8 +24,14 @@ export function RemoteImage({
   imageClassName?: string;
   children?: ReactNode;
 }) {
-  const [hasError, setHasError] = useState(false);
-  const showFallback = !src || hasError;
+  const sources = (Array.isArray(src) ? src : [src]).filter(Boolean) as string[];
+  const [sourceIndex, setSourceIndex] = useState(0);
+  const activeSrc = sources[sourceIndex];
+  const showFallback = !activeSrc;
+
+  useEffect(() => {
+    setSourceIndex(0);
+  }, [src]);
 
   return (
     <div className={cn("relative overflow-hidden bg-beige", className)}>
@@ -44,10 +50,10 @@ export function RemoteImage({
           fill
           alt={alt}
           className={cn("object-cover", imageClassName)}
-          onError={() => setHasError(true)}
+          onError={() => setSourceIndex((current) => current + 1)}
           priority={priority}
           sizes={sizes}
-          src={src}
+          src={activeSrc}
         />
       )}
       {children}

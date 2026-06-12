@@ -151,28 +151,33 @@ export default function HomePage() {
       </section>
 
       <section className="container-page mt-8">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="overflow-hidden rounded-[26px] border border-beige-border bg-[oklch(0.95_0.03_60)]">
           {benefitCards.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-beige-border bg-[oklch(0.95_0.03_60)] p-5"
+              className="flex items-center gap-3 px-4 py-4 not-last:border-b not-last:border-beige-border sm:px-5 lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr] lg:gap-0 lg:px-0 lg:py-0 lg:not-last:border-b-0 lg:not-last:border-r lg:not-last:border-beige-border"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="kicker">{item.kicker}</p>
-                  <h3 className="mt-1 font-bold leading-tight text-navy">{item.title}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{item.sub}</p>
-                </div>
-                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">
-                  <RemoteImage
-                    alt={item.image.alt}
-                    className="h-full w-full"
-                    fallbackLabel={item.image.fallbackLabel}
-                    imageClassName="object-cover"
-                    sizes="48px"
-                    src={item.image.src}
-                  />
-                </div>
+              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl lg:mx-auto lg:h-12 lg:w-12">
+                <RemoteImage
+                  alt={item.image.alt}
+                  className="h-full w-full"
+                  fallbackLabel={item.image.fallbackLabel}
+                  imageClassName="object-cover"
+                  sizes="48px"
+                  src={item.image.src}
+                />
+              </div>
+              <div className="min-w-0 flex-1 lg:col-span-2 lg:px-5 lg:py-5">
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-red">
+                  {item.kicker}
+                </p>
+                <h3 className="mt-1 text-sm font-bold leading-tight text-navy lg:text-base">
+                  {item.title}
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">{item.sub}</p>
+              </div>
+              <div className="shrink-0 text-navy/40 lg:pr-5">
+                <ArrowRight className="h-4 w-4" />
               </div>
             </div>
           ))}
@@ -466,7 +471,7 @@ function ProductSection({
   return (
     <section className="container-page mt-16">
       <SectionHeader kicker={kicker} title={title} link={{ href: link, label: "Open shop" }} />
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5">
         {items.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}
