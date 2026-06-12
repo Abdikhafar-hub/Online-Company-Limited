@@ -12,9 +12,9 @@ import process from "node:process";
 //     handlers. Wrap reads in a function so they run per-request.
 //   - inline process.env inside a createServerFn handler: one-off reads
 //     not reused elsewhere.
-//   - import.meta.env.VITE_FOO: PUBLIC config readable from both client
-//     and server (analytics IDs, public URLs). Define in .env with the
-//     VITE_ prefix. Never put secrets here — they ship to the browser.
+//   - process.env.NEXT_PUBLIC_FOO: PUBLIC config readable from both client
+//     and server components. Define in .env with the NEXT_PUBLIC_ prefix.
+//     Never put secrets here — they ship to the browser.
 
 export function getServerConfig() {
   return {

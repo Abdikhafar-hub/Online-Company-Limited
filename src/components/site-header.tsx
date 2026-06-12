@@ -1,122 +1,271 @@
-import { Link } from "@tanstack/react-router";
-import { Search, MessageCircle, Menu, X, Monitor } from "lucide-react";
-import { useState } from "react";
-import { SITE, CATEGORIES, buildWhatsAppLink } from "@/lib/site-data";
+"use client";
 
-const NAV = [
-  { to: "/category/computers-laptops", label: "Computers & Laptops" },
-  { to: "/category/phones-tablets", label: "Phones & Tablets" },
-  { to: "/category/computer-accessories", label: "Accessories" },
-  { to: "/category/cctv-security", label: "CCTV & Security" },
-  { to: "/category/printers-office", label: "Printers" },
-  { to: "/category/networking", label: "Networking" },
-  { to: "/repairs", label: "Repairs" },
-  { to: "/bulk-supply", label: "Bulk Supply" },
-  { to: "/branches", label: "Branches" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Search, MessageCircle, Menu, X, Monitor, ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { SHOP_NAV } from "@/lib/navigation";
+import { CATEGORIES, buildWhatsAppLink } from "@/lib/site-data";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState<string | null>(null);
+  const pathname = usePathname();
   const wa = buildWhatsAppLink("Hello Online Company Limited, I'd like to place an order.");
 
+  const isHrefActive = (href: string) => {
+    const [path, query = ""] = href.split("?");
+
+    if (query) return false;
+    return path === pathname;
+  };
+
+  const isGroupActive = (href: string, links: Array<{ label: string; href: string }>) =>
+    isHrefActive(href) || links.some((link) => isHrefActive(link.href));
+
   return (
-    <header className="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-beige-border">
-      {/* Top announcement bar */}
-      <div className="bg-navy text-cream/90 text-xs">
-        <div className="container-page py-2 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-beige-border bg-cream/95 backdrop-blur">
+      <div className="bg-navy text-xs text-cream/90">
+        <div className="container-page flex items-center justify-between gap-4 py-2">
           <span>We offer countrywide delivery</span>
           <span className="hidden sm:inline">Genuine Imports · Bulk Supply · Repairs</span>
         </div>
       </div>
 
-      {/* Main header */}
-      <div className="container-page py-4 flex items-center gap-6">
-        <Link to="/" className="flex items-center gap-3 shrink-0">
-          <div className="h-11 w-11 rounded-xl bg-navy text-cream grid place-items-center">
+      <div className="container-page flex items-center gap-6 py-4">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
+          <div className="grid h-11 w-11 place-items-center rounded-xl bg-navy text-cream">
             <Monitor className="h-5 w-5" />
           </div>
           <div className="leading-tight">
             <div className="text-[15px] font-extrabold tracking-wide text-navy">ONLINE COMPANY</div>
-            <div className="text-[10px] font-semibold tracking-[0.22em] text-muted-foreground">LIMITED · KENYA</div>
+            <div className="text-[10px] font-semibold tracking-[0.22em] text-muted-foreground">
+              LIMITED · KENYA
+            </div>
           </div>
         </Link>
 
-        {/* Search */}
         <form
           action="/products"
           method="get"
-          className="hidden lg:flex flex-1 items-center bg-white border border-beige-border rounded-full pl-2 pr-1.5 py-1.5 shadow-[0_6px_18px_-14px_rgba(11,19,43,0.4)]"
+          className="hidden flex-1 items-center rounded-full border border-beige-border bg-white py-1.5 pl-2 pr-1.5 shadow-[0_6px_18px_-14px_rgba(11,19,43,0.4)] lg:flex"
         >
-          <select name="cat" className="bg-transparent text-sm font-medium text-navy pl-3 pr-2 py-2 outline-none border-r border-beige-border rounded-l-full">
+          <select
+            name="cat"
+            className="rounded-l-full border-r border-beige-border bg-transparent py-2 pl-3 pr-2 text-sm font-medium text-navy outline-none"
+          >
             <option value="">All Categories</option>
-            {CATEGORIES.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
+            {CATEGORIES.map((c) => (
+              <option key={c.slug} value={c.slug}>
+                {c.name}
+              </option>
+            ))}
           </select>
-          <Search className="h-4 w-4 text-muted-foreground ml-3" />
+          <Search className="ml-3 h-4 w-4 text-muted-foreground" />
           <input
             name="q"
             type="search"
             placeholder="Search laptops, phones, CCTV, printers, accessories..."
             className="flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
           />
-          <button type="submit" className="bg-brand-red hover:opacity-90 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-opacity">
+          <button
+            type="submit"
+            className="rounded-full bg-brand-red px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          >
             Search
           </button>
         </form>
 
-        <div className="hidden md:flex items-center gap-2 shrink-0">
-          <a href={wa} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-whatsapp hover:bg-whatsapp-dark text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors">
+        <div className="hidden shrink-0 items-center gap-2 md:flex">
+          <a
+            href={wa}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-whatsapp-dark"
+          >
             <MessageCircle className="h-4 w-4" /> Order on WhatsApp
           </a>
-          <Link to="/quote" className="text-sm font-semibold border border-navy/20 text-navy px-4 py-2.5 rounded-full hover:bg-navy hover:text-cream transition-colors">
+          <Link
+            href="/quote"
+            className="rounded-full border border-navy/20 px-4 py-2.5 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-cream"
+          >
             Request Quote
           </Link>
         </div>
 
-        <button onClick={() => setOpen(!open)} className="lg:hidden ml-auto p-2 rounded-lg border border-beige-border" aria-label="Menu">
+        <button
+          onClick={() => setOpen(!open)}
+          className="ml-auto rounded-lg border border-beige-border p-2 lg:hidden"
+          aria-label="Menu"
+        >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {/* Nav bar */}
-      <nav className="hidden lg:block border-t border-beige-border">
-        <div className="container-page py-3 flex items-center gap-1 overflow-x-auto">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-sm font-semibold text-navy px-3.5 py-2 rounded-full hover:bg-cream-deep whitespace-nowrap"
-              activeProps={{ className: "text-sm font-semibold text-brand-red px-3.5 py-2 rounded-full bg-cream-deep whitespace-nowrap" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+      <nav className="hidden border-t border-beige-border bg-white lg:block">
+        <div className="container-page relative overflow-visible">
+          <div className="flex flex-wrap items-center gap-1 overflow-visible py-3">
+            {SHOP_NAV.map((item) => {
+              const active = isGroupActive(item.href, item.links);
+              const openMenu = desktopOpen === item.label;
+
+              return (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => setDesktopOpen(item.label)}
+                  onMouseLeave={() =>
+                    setDesktopOpen((current) => (current === item.label ? null : current))
+                  }
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setDesktopOpen((current) => (current === item.label ? null : item.label))
+                    }
+                    className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-semibold transition-colors ${
+                      active
+                        ? "bg-cream-deep text-whatsapp-dark"
+                        : "text-navy hover:bg-cream-deep hover:text-whatsapp-dark"
+                    }`}
+                    aria-expanded={openMenu}
+                    aria-haspopup="menu"
+                  >
+                    {item.label}
+                    {item.links.length > 0 ? (
+                      <ChevronDown
+                        className={`h-3.5 w-3.5 transition-transform ${openMenu ? "rotate-180" : ""}`}
+                      />
+                    ) : null}
+                  </button>
+
+                  {item.links.length > 0 && openMenu ? (
+                    <div className="absolute left-0 top-full z-50 pt-3">
+                      <div className="max-h-[70vh] min-w-[240px] overflow-y-auto rounded-[22px] border border-beige-border bg-white p-3 shadow-[0_24px_60px_-24px_rgba(11,19,43,0.35)]">
+                        {item.links.map((link) => (
+                          <Link
+                            key={`${item.label}-${link.label}-${link.href}`}
+                            href={link.href}
+                            className={`block rounded-2xl px-4 py-2.5 text-sm transition-colors ${
+                              isHrefActive(link.href)
+                                ? "bg-cream text-whatsapp-dark"
+                                : "text-navy hover:bg-cream hover:text-whatsapp-dark"
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="lg:hidden border-t border-beige-border bg-cream">
-          <div className="container-page py-3 space-y-2">
-            <form action="/products" method="get" className="flex items-center bg-white border border-beige-border rounded-full pl-3 pr-1 py-1">
+      {open ? (
+        <div className="border-t border-beige-border bg-cream lg:hidden">
+          <div className="container-page space-y-3 py-3">
+            <form
+              action="/products"
+              method="get"
+              className="flex items-center rounded-full border border-beige-border bg-white pl-3 pr-1 py-1"
+            >
               <Search className="h-4 w-4 text-muted-foreground" />
-              <input name="q" type="search" placeholder="Search products..." className="flex-1 bg-transparent px-3 py-2 text-sm outline-none" />
-              <button type="submit" className="bg-brand-red text-white text-sm font-semibold px-4 py-2 rounded-full">Go</button>
+              <input
+                name="q"
+                type="search"
+                placeholder="Search products..."
+                className="flex-1 bg-transparent px-3 py-2 text-sm outline-none"
+              />
+              <button
+                type="submit"
+                className="rounded-full bg-brand-red px-4 py-2 text-sm font-semibold text-white"
+              >
+                Go
+              </button>
             </form>
-            <div className="grid grid-cols-2 gap-1">
-              {NAV.map((item) => (
-                <Link key={item.to} to={item.to} onClick={() => setOpen(false)} className="text-sm font-semibold text-navy py-2 px-3 rounded-lg hover:bg-cream-deep">
-                  {item.label}
-                </Link>
-              ))}
+
+            <div className="space-y-2">
+              {SHOP_NAV.map((item) => {
+                const active = isGroupActive(item.href, item.links);
+                const expanded = mobileOpen === item.label;
+
+                return (
+                  <div
+                    key={item.label}
+                    className="overflow-hidden rounded-2xl border border-beige-border bg-white"
+                  >
+                    <div className="flex items-center gap-2 p-2">
+                      <button
+                        type="button"
+                        onClick={() => setMobileOpen(expanded ? null : item.label)}
+                        className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold ${
+                          active ? "bg-cream text-whatsapp-dark" : "text-navy"
+                        }`}
+                      >
+                        {item.label}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setMobileOpen(expanded ? null : item.label)}
+                        className="rounded-xl border border-beige-border p-2 text-navy"
+                        aria-label={`Toggle ${item.label} menu`}
+                      >
+                        {expanded ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+
+                    {expanded ? (
+                      <div className="border-t border-beige-border px-2 pb-2 pt-1">
+                        <div className="grid gap-1">
+                          {item.links.map((link) => (
+                            <Link
+                              key={`${item.label}-${link.label}-${link.href}`}
+                              href={link.href}
+                              onClick={() => setOpen(false)}
+                              className={`rounded-xl px-3 py-2 text-sm ${
+                                isHrefActive(link.href)
+                                  ? "bg-cream text-whatsapp-dark"
+                                  : "text-muted-foreground hover:bg-cream hover:text-navy"
+                              }`}
+                            >
+                              {link.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
             </div>
+
             <div className="flex gap-2 pt-2">
-              <a href={wa} className="flex-1 text-center bg-whatsapp text-white text-sm font-semibold px-4 py-2.5 rounded-full">WhatsApp</a>
-              <Link to="/quote" onClick={() => setOpen(false)} className="flex-1 text-center border border-navy/20 text-navy text-sm font-semibold px-4 py-2.5 rounded-full">Quote</Link>
+              <a
+                href={wa}
+                className="flex-1 rounded-full bg-whatsapp px-4 py-2.5 text-center text-sm font-semibold text-white"
+              >
+                WhatsApp
+              </a>
+              <Link
+                href="/quote"
+                onClick={() => setOpen(false)}
+                className="flex-1 rounded-full border border-navy/20 px-4 py-2.5 text-center text-sm font-semibold text-navy"
+              >
+                Quote
+              </Link>
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }
