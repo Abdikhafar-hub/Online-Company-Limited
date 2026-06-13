@@ -71,9 +71,9 @@ export default function HomePage() {
   const categoryCards = CATEGORIES.filter(
     (category) => category.slug !== "content-creator-kit",
   ).map((category) => ({
-      category,
-      image: getCategoryImage(category.slug),
-    }));
+    category,
+    image: getCategoryImage(category.slug),
+  }));
 
   const serviceCards = SERVICES.slice(0, 6).map((service) => ({
     service,
