@@ -28,7 +28,7 @@ export default function RepairsPage() {
         title="Device repair done right"
       >
         We diagnose, repair and refurbish phones, laptops, tablets, printers and CCTV systems.
-        Board-level expertise, genuine parts, and honest pricing.
+        Board-level expertise, genuine parts, and dependable support.
       </PageHero>
       <section className="container-page mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {repairServices.map((service) => {

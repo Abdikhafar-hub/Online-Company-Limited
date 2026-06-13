@@ -18,7 +18,7 @@ export default function BulkSupplyPage() {
         breadcrumb="Home / Bulk Supply"
         image={pageHeroImages.bulkSupply}
       >
-        Reliable stock, transparent pricing and on-time delivery. We supply electronics shops,
+        Reliable stock, transparent communication and on-time delivery. We supply electronics shops,
         companies, schools, offices, cyber cafes, NGOs and institutions across Kenya.
       </PageHero>
       <section className="container-page mt-8 grid gap-4 md:grid-cols-2">
@@ -65,8 +65,8 @@ export default function BulkSupplyPage() {
           <div>
             <h2 className="text-2xl font-extrabold md:text-3xl">Need a quote for a procurement?</h2>
             <p className="mt-2 max-w-xl text-cream/70">
-              Share your list, quantities and timeline. We'll respond with availability and
-              competitive pricing.
+              Share your list, quantities and timeline. We'll respond with availability and quote
+              options.
             </p>
           </div>
           <Link

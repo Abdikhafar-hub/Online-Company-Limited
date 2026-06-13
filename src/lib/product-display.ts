@@ -1,4 +1,4 @@
-import type { Product } from "./site-data";
+import type { Product } from "./catalog-products";
 
 export const PRICE_ON_REQUEST_LABEL = "Price on request";
 
@@ -58,7 +58,7 @@ function sanitizeProductCopy(value: string) {
 export function getProductDisplayShortSpec(product: Product) {
   return (
     sanitizeProductCopy(product.shortSpec) ||
-    "Contact us for the latest specs and delivery details."
+    "Contact us for the latest specs, availability and delivery details."
   );
 }
 
@@ -77,6 +77,23 @@ export function getProductDisplaySpecs(product: Product) {
       value: sanitizeProductCopy(spec.value),
     }))
     .filter((spec) => spec.value);
+}
+
+function sanitizeWhatsAppInquiryText(value: string) {
+  return value.replace(/final price/gi, "quote details");
+}
+
+export function sanitizeProductForDisplay(product: Product): Product {
+  return {
+    ...product,
+    oldPrice: undefined,
+    price: undefined,
+    requestPrice: true,
+    shortSpec: getProductDisplayShortSpec(product),
+    description: getProductDisplayDescription(product),
+    specs: getProductDisplaySpecs(product),
+    whatsappInquiryText: sanitizeWhatsAppInquiryText(product.whatsappInquiryText),
+  };
 }
 
 export function buildPhoneLink(phone: string) {

@@ -32,13 +32,10 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="line-clamp-2 text-[10px] leading-relaxed text-muted-foreground sm:text-sm">
           {getProductDisplayShortSpec(product)}
         </p>
-        <div className="mt-auto rounded-2xl border border-beige-border bg-cream p-3 sm:rounded-[1.4rem] sm:p-4">
-          <p className="text-sm font-extrabold text-navy sm:text-base">{PRICE_ON_REQUEST_LABEL}</p>
-          <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground sm:text-xs">
-            Contact us for the latest quote, warranty and delivery details.
-          </p>
+        <div className="mt-auto rounded-xl border border-beige-border bg-cream px-2.5 py-2.5 sm:rounded-2xl sm:px-3 sm:py-3">
+          <p className="text-xs font-extrabold text-navy sm:text-sm">{PRICE_ON_REQUEST_LABEL}</p>
           <ProductInquiryActions
-            className="mt-3"
+            className="mt-2"
             compact
             productName={product.name}
             whatsappMessage={product.whatsappInquiryText}

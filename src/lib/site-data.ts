@@ -66,7 +66,7 @@ export const CATEGORIES: Category[] = [
       "Memory Cards",
     ],
     description:
-      "Phone chargers, power banks, audio gear, covers and memory — quality brands at fair prices.",
+      "Phone chargers, power banks, audio gear, covers and memory — quality brands for everyday use.",
   },
   {
     slug: "content-creator-kit",
@@ -257,8 +257,6 @@ export const PROJECTS: CaseStudy[] = [
     tag: "Wholesale",
   },
 ];
-
-export const formatKES = (n: number) => "KSh " + n.toLocaleString("en-KE");
 
 export const buildWhatsAppLink = (message: string) =>
   `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;

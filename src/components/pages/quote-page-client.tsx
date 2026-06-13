@@ -17,7 +17,7 @@ export function QuotePageClient() {
             <h1 className="mt-4 text-2xl font-extrabold text-navy">Quote request received</h1>
             <p className="mt-2 text-muted-foreground">
               Thank you. Our team will be in touch within one working day with availability and
-              pricing.
+              quote details.
             </p>
           </div>
         </section>
@@ -28,8 +28,8 @@ export function QuotePageClient() {
   return (
     <SiteLayout>
       <PageHero kicker="Get a quote" title="Tell us what you need" breadcrumb="Home / Quote">
-        Share your requirement and budget. We'll respond with competitive pricing, availability and
-        delivery options.
+        Share your requirement and budget. We'll respond with quote options, availability and
+        delivery details.
       </PageHero>
       <section className="container-page mt-8">
         <form
@@ -51,7 +51,7 @@ export function QuotePageClient() {
           <SelectField label="Category" name="category" options={CATEGORIES.map((c) => c.name)} />
           <Field label="Product or service needed" name="product" required />
           <Field label="Quantity" name="quantity" type="number" />
-          <Field label="Budget range (KSh)" name="budget" />
+          <Field label="Budget range" name="budget" />
           <SelectField
             label="Urgency"
             name="urgency"

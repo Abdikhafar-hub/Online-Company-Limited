@@ -53,7 +53,7 @@ export default function AboutPage() {
           <div className="mt-5 max-w-4xl space-y-5 text-base leading-8 text-[#7a7a7a] md:text-lg md:leading-9">
             <p>
               We are known for supplying genuine smartphones, laptops, accessories, networking gear
-              and office devices at fair prices, backed by practical support and reliable delivery.
+              and office devices backed by practical support and reliable delivery.
             </p>
             <p>
               Over the years we have grown into a dependable source for individuals, resellers,
@@ -145,9 +145,9 @@ export default function AboutPage() {
           </SectionBlock>
 
           <SectionBlock title="Integrity:">
-            We value honesty in pricing, product representation and service. The trust clients place
-            in us is the reason we keep improving our processes, our catalog depth and our support
-            experience.
+            We value honesty in communication, product representation and service. The trust clients
+            place in us is the reason we keep improving our processes, our catalog depth and our
+            support experience.
           </SectionBlock>
         </div>
       </section>
