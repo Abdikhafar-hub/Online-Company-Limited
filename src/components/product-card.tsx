@@ -6,7 +6,7 @@ import { ProductVisual } from "./product-visual";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-beige-border bg-white transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(11,19,43,0.35)] sm:rounded-3xl">
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-beige-border bg-white transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(11,19,43,0.35)] sm:h-full sm:rounded-3xl">
       <Link href={`/products/${product.slug}`} className="block p-2 pb-1 sm:p-4 sm:pb-2">
         <div className="relative">
           <span className="absolute top-2 left-2 z-10 rounded-full bg-white/90 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-navy-soft sm:px-2.5 sm:text-[0.7rem] sm:tracking-[0.16em]">
@@ -29,13 +29,13 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="text-[10px] font-semibold uppercase tracking-wide text-whatsapp-dark sm:text-xs">
           {product.stockStatus}
         </p>
-        <p className="line-clamp-2 text-[10px] leading-relaxed text-muted-foreground sm:text-sm">
+        <p className="line-clamp-1 text-[10px] leading-relaxed text-muted-foreground sm:line-clamp-2 sm:text-sm">
           {getProductDisplayShortSpec(product)}
         </p>
-        <div className="mt-auto rounded-xl border border-beige-border bg-cream px-2.5 py-2.5 sm:rounded-2xl sm:px-3 sm:py-3">
+        <div className="mt-2 rounded-xl border border-beige-border bg-cream px-2 py-2 sm:mt-auto sm:rounded-2xl sm:px-3 sm:py-3">
           <p className="text-xs font-extrabold text-navy sm:text-sm">{PRICE_ON_REQUEST_LABEL}</p>
           <ProductInquiryActions
-            className="mt-2"
+            className="mt-1.5"
             compact
             productName={product.name}
             whatsappMessage={product.whatsappInquiryText}
