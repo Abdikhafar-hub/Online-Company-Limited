@@ -16,7 +16,7 @@ export function ProductInquiryActions({
   const whatsappLink = buildWhatsAppLink(whatsappMessage);
   const callLink = buildPhoneLink(SITE.phone);
   const buttonClassName = compact
-    ? "inline-flex min-h-9 w-full items-center justify-center gap-1 rounded-full px-2 py-1.5 text-[10px] font-semibold leading-tight transition-colors"
+    ? "inline-flex min-h-8 w-full items-center justify-center gap-1 rounded-full px-2 py-1.5 text-[9px] font-semibold leading-none transition-colors"
     : "inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-colors";
 
   return (
@@ -31,7 +31,7 @@ export function ProductInquiryActions({
         className={`${buttonClassName} bg-whatsapp text-white hover:bg-whatsapp-dark`}
       >
         <MessageCircle className={compact ? "h-3.5 w-3.5 shrink-0" : "h-4 w-4"} />
-        <span>WhatsApp Inquiry</span>
+        <span>{compact ? "WhatsApp" : "WhatsApp Inquiry"}</span>
       </a>
       <a
         href={callLink}
@@ -39,7 +39,7 @@ export function ProductInquiryActions({
         className={`${buttonClassName} border border-navy/15 bg-white text-navy hover:bg-cream`}
       >
         <Phone className={compact ? "h-3.5 w-3.5 shrink-0" : "h-4 w-4"} />
-        <span>Call to Inquire</span>
+        <span>{compact ? "Call" : "Call to Inquire"}</span>
       </a>
     </div>
   );
