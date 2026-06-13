@@ -136,8 +136,6 @@ export function CatalogBrowser({
             className="w-full min-w-0 rounded-full border border-beige-border bg-cream px-4 py-2.5 text-sm font-medium"
           >
             <option value="latest">Latest</option>
-            <option value="price-low">Price Low</option>
-            <option value="price-high">Price High</option>
             <option value="name-az">Name A-Z</option>
           </select>
         </div>

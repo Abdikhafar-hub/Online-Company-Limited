@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Check, MessageCircle, ShieldCheck, Truck } from "lucide-react";
+import { ArrowLeft, Check, ShieldCheck, Truck } from "lucide-react";
 import { notFound } from "next/navigation";
+import { ProductInquiryActions } from "@/components/product-inquiry-actions";
 import { ProductCard } from "@/components/product-card";
 import { ProductVisual } from "@/components/product-visual";
 import { SiteLayout } from "@/components/site-layout";
-import { PRODUCTS, buildWhatsAppLink, formatKES } from "@/lib/site-data";
+import {
+  PRICE_ON_REQUEST_LABEL,
+  getProductDisplayDescription,
+  getProductDisplaySpecs,
+} from "@/lib/product-display";
+import { PRODUCTS } from "@/lib/site-data";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -42,8 +48,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const related = PRODUCTS.filter(
     (item) => item.category === product.category && item.slug !== product.slug,
   ).slice(0, 4);
-  const wa = buildWhatsAppLink(product.whatsappInquiryText);
-  const quoteMsg = buildWhatsAppLink(`Hello, I'd like a quote for: ${product.name}.`);
+  const description = getProductDisplayDescription(product);
+  const specs = getProductDisplaySpecs(product);
 
   return (
     <SiteLayout>
@@ -65,28 +71,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h1 className="mt-2 text-3xl font-extrabold leading-tight text-navy md:text-4xl">
               {product.name}
             </h1>
-            <div className="mt-4 flex flex-wrap items-baseline gap-2 sm:gap-3">
-              {product.requestPrice ? (
-                <span className="text-2xl font-bold text-navy">Request Price</span>
-              ) : (
-                <>
-                  <span className="text-2xl font-extrabold text-navy sm:text-3xl">
-                    {formatKES(product.price!)}
-                  </span>
-                  {product.oldPrice ? (
-                    <span className="text-sm text-muted-foreground line-through sm:text-base">
-                      {formatKES(product.oldPrice)}
-                    </span>
-                  ) : null}
-                </>
-              )}
+            <div className="mt-4 rounded-3xl border border-beige-border bg-cream p-4 sm:p-5">
+              <p className="text-2xl font-extrabold text-navy sm:text-3xl">
+                {PRICE_ON_REQUEST_LABEL}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                Reach out for the latest quote, availability, warranty and delivery options.
+              </p>
+              <ProductInquiryActions
+                className="mt-4"
+                productName={product.name}
+                whatsappMessage={product.whatsappInquiryText}
+              />
             </div>
             <p className="mt-2 text-sm font-semibold text-whatsapp-dark">
               {product.stockStatus} · Ready to ship countrywide
             </p>
-            <p className="mt-5 leading-relaxed text-muted-foreground">{product.description}</p>
+            <p className="mt-5 leading-relaxed text-muted-foreground">{description}</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {product.specs.map((spec) => (
+              {specs.map((spec) => (
                 <div
                   key={spec.label}
                   className="rounded-xl border border-beige-border bg-cream p-3"
@@ -97,24 +100,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   <div className="mt-0.5 text-sm font-semibold text-navy">{spec.value}</div>
                 </div>
               ))}
-            </div>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a
-                href={wa}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 font-semibold text-white hover:bg-whatsapp-dark sm:w-auto"
-              >
-                <MessageCircle className="h-4 w-4" /> Order on WhatsApp
-              </a>
-              <a
-                href={quoteMsg}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-navy/20 px-5 py-3 font-semibold text-navy sm:w-auto"
-              >
-                Request Quote
-              </a>
             </div>
             <div className="mt-6 flex flex-wrap gap-3 text-xs text-muted-foreground sm:gap-4">
               <span className="flex items-center gap-1.5">

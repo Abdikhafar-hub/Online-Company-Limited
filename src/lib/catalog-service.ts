@@ -1,6 +1,6 @@
 import { CATEGORIES, PRODUCTS, type Product } from "./site-data";
 
-export type CatalogSort = "latest" | "price-low" | "price-high" | "name-az";
+export type CatalogSort = "latest" | "name-az";
 
 export type CatalogFilters = {
   brand?: string;
@@ -142,12 +142,6 @@ export function sortCatalogProducts(products: Product[], sort: CatalogSort) {
   const sorted = [...products];
 
   switch (sort) {
-    case "price-low":
-      return sorted.sort(
-        (a, b) => (a.price ?? Number.MAX_SAFE_INTEGER) - (b.price ?? Number.MAX_SAFE_INTEGER),
-      );
-    case "price-high":
-      return sorted.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
     case "name-az":
       return sorted.sort((a, b) => a.name.localeCompare(b.name));
     case "latest":
