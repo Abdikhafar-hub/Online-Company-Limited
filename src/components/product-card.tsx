@@ -32,10 +32,12 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="line-clamp-1 text-[10px] leading-relaxed text-muted-foreground sm:line-clamp-2 sm:text-sm">
           {getProductDisplayShortSpec(product)}
         </p>
-        <div className="mt-2 rounded-xl border border-beige-border bg-cream px-2 py-2 sm:mt-auto sm:rounded-2xl sm:px-3 sm:py-3">
-          <p className="text-xs font-extrabold text-navy sm:text-sm">{PRICE_ON_REQUEST_LABEL}</p>
+        <div className="mt-1.5 rounded-lg border border-beige-border bg-cream px-1.5 py-1.5 sm:mt-auto sm:rounded-xl sm:px-2 sm:py-2">
+          <p className="text-[11px] font-extrabold leading-none text-navy sm:text-xs">
+            {PRICE_ON_REQUEST_LABEL}
+          </p>
           <ProductInquiryActions
-            className="mt-1.5"
+            className="mt-1"
             compact
             productName={product.name}
             whatsappMessage={product.whatsappInquiryText}

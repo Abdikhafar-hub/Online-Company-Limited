@@ -191,44 +191,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page mt-16">
-        <div className="grid items-center gap-10 rounded-3xl border border-beige-border bg-white p-8 md:p-12 lg:grid-cols-[1.2fr_1fr]">
+      <section className="container-page mt-12 md:mt-16">
+        <div className="grid items-center gap-6 rounded-3xl border border-beige-border bg-white p-6 md:gap-10 md:p-12 lg:grid-cols-[1.2fr_1fr]">
           <div>
             <p className="kicker">About the company</p>
-            <h2 className="mt-2 text-3xl font-extrabold leading-tight text-navy md:text-4xl">
+            <h2 className="mt-2 text-[2rem] font-extrabold leading-tight text-navy md:text-4xl">
               More Than an Electronics Shop
             </h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
+            <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground md:mt-4 md:text-base">
               Online Company Limited is a trusted ICT and electronics supply company serving
               individuals, businesses, institutions and resellers across Kenya. We source genuine
               products, import from abroad, supply in bulk, support retail customers, and provide
               professional repair and maintenance services.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-2.5 md:mt-6 md:gap-3">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 font-semibold text-cream"
+                className="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-cream md:px-5 md:py-3 md:text-base"
               >
                 Read our story
               </Link>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 rounded-full border border-navy/20 px-5 py-3 font-semibold text-navy"
+                className="inline-flex items-center gap-2 rounded-full border border-navy/20 px-4 py-2.5 text-sm font-semibold text-navy md:px-5 md:py-3 md:text-base"
               >
                 See projects
               </Link>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             {[
               { n: "1,000+", l: "Products supplied" },
               { n: String(BRANCHES.length), l: "Branches across Kenya" },
               { n: "Retail", l: "& Wholesale ready" },
               { n: "B2B", l: "Corporate supply" },
             ].map((stat) => (
-              <div key={stat.l} className="rounded-2xl border border-beige-border bg-cream p-5">
-                <div className="text-2xl font-extrabold text-navy">{stat.n}</div>
-                <div className="mt-1 text-xs font-medium text-muted-foreground">{stat.l}</div>
+              <div
+                key={stat.l}
+                className="rounded-2xl border border-beige-border bg-cream p-4 md:p-5"
+              >
+                <div className="text-[1.75rem] font-extrabold text-navy md:text-2xl">{stat.n}</div>
+                <div className="mt-1 text-[11px] font-medium text-muted-foreground md:text-xs">
+                  {stat.l}
+                </div>
               </div>
             ))}
           </div>
