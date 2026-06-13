@@ -98,30 +98,30 @@ export default function HomePage() {
               src={homeHeroPromos.main.src}
             />
           </Link>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:gap-5">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-5">
             <Link
               href="/bulk-supply"
-              className="relative block aspect-[1774/887] overflow-hidden rounded-[24px] border border-beige-border bg-white lg:rounded-[28px]"
+              className="relative block aspect-[0.9/1] overflow-hidden rounded-[24px] border border-beige-border bg-[#081122] lg:aspect-[1774/887] lg:rounded-[28px]"
             >
               <RemoteImage
                 alt={homeHeroPromos.bulkSupply.alt}
-                className="absolute inset-0"
+                className="absolute inset-0 bg-[#081122]"
                 fallbackLabel={homeHeroPromos.bulkSupply.fallbackLabel}
-                imageClassName="object-cover object-center"
-                sizes="(min-width: 1024px) 28vw, (min-width: 640px) 36vw, 100vw"
+                imageClassName="object-contain object-center"
+                sizes="(min-width: 1024px) 28vw, 48vw"
                 src={homeHeroPromos.bulkSupply.src}
               />
             </Link>
             <Link
               href="/repairs"
-              className="relative block aspect-[1774/887] overflow-hidden rounded-[24px] border border-beige-border bg-white lg:rounded-[28px]"
+              className="relative block aspect-[0.9/1] overflow-hidden rounded-[24px] border border-beige-border bg-[#081122] lg:aspect-[1774/887] lg:rounded-[28px]"
             >
               <RemoteImage
                 alt={homeHeroPromos.repairs.alt}
-                className="absolute inset-0"
+                className="absolute inset-0 bg-[#081122]"
                 fallbackLabel={homeHeroPromos.repairs.fallbackLabel}
-                imageClassName="object-cover object-center"
-                sizes="(min-width: 1024px) 28vw, (min-width: 640px) 36vw, 100vw"
+                imageClassName="object-contain object-center"
+                sizes="(min-width: 1024px) 28vw, 48vw"
                 src={homeHeroPromos.repairs.src}
               />
             </Link>
