@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
@@ -101,28 +102,28 @@ export default function HomePage() {
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-5">
             <Link
               href="/bulk-supply"
-              className="relative block aspect-[0.9/1] overflow-hidden rounded-[24px] border border-beige-border bg-[#081122] lg:aspect-[1774/887] lg:rounded-[28px]"
+              className="block overflow-hidden rounded-[24px] border border-beige-border bg-white lg:rounded-[28px]"
             >
-              <RemoteImage
-                alt={homeHeroPromos.bulkSupply.alt}
-                className="absolute inset-0 bg-[#081122]"
-                fallbackLabel={homeHeroPromos.bulkSupply.fallbackLabel}
-                imageClassName="object-contain object-center"
-                sizes="(min-width: 1024px) 28vw, 48vw"
+              <Image
                 src={homeHeroPromos.bulkSupply.src}
+                alt={homeHeroPromos.bulkSupply.alt}
+                width={1774}
+                height={887}
+                className="block h-auto w-full"
+                sizes="(min-width: 1024px) 28vw, 48vw"
               />
             </Link>
             <Link
               href="/repairs"
-              className="relative block aspect-[0.9/1] overflow-hidden rounded-[24px] border border-beige-border bg-[#081122] lg:aspect-[1774/887] lg:rounded-[28px]"
+              className="block overflow-hidden rounded-[24px] border border-beige-border bg-white lg:rounded-[28px]"
             >
-              <RemoteImage
-                alt={homeHeroPromos.repairs.alt}
-                className="absolute inset-0 bg-[#081122]"
-                fallbackLabel={homeHeroPromos.repairs.fallbackLabel}
-                imageClassName="object-contain object-center"
-                sizes="(min-width: 1024px) 28vw, 48vw"
+              <Image
                 src={homeHeroPromos.repairs.src}
+                alt={homeHeroPromos.repairs.alt}
+                width={1774}
+                height={887}
+                className="block h-auto w-full"
+                sizes="(min-width: 1024px) 28vw, 48vw"
               />
             </Link>
           </div>
