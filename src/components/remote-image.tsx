@@ -5,6 +5,17 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
+function shouldBypassOptimization(source?: string) {
+  if (!source) return false;
+
+  try {
+    const { hostname } = new URL(source);
+    return hostname === "www.phoneplacekenya.com";
+  } catch {
+    return false;
+  }
+}
+
 export function RemoteImage({
   alt,
   children,
@@ -28,6 +39,7 @@ export function RemoteImage({
   const [sourceIndex, setSourceIndex] = useState(0);
   const activeSrc = sources[sourceIndex];
   const showFallback = !activeSrc;
+  const unoptimized = shouldBypassOptimization(activeSrc);
 
   useEffect(() => {
     setSourceIndex(0);
@@ -54,6 +66,7 @@ export function RemoteImage({
           priority={priority}
           sizes={sizes}
           src={activeSrc}
+          unoptimized={unoptimized}
         />
       )}
       {children}

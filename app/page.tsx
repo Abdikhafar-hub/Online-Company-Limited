@@ -27,38 +27,53 @@ export default function HomePage() {
   const gaming = PRODUCTS.filter((p) => p.category === "gaming").slice(0, 4);
   const storage = PRODUCTS.filter((p) => p.category === "storage-components").slice(0, 4);
   const wa = buildWhatsAppLink("Hello Online Company Limited, I'd like to make an inquiry.");
+  const homeHeroPromos = {
+    bulkSupply: {
+      alt: "Corporate and bulk supply homepage promo",
+      fallbackLabel: "Corporate & Bulk Supply",
+      src: "/home-hero/bulk-supply-promo.png",
+    },
+    main: {
+      alt: "Main homepage hero promo for electronics and ICT supply",
+      fallbackLabel: "Genuine Electronics, ICT Equipment & Accessories",
+      src: "/home-hero/main-hero-promo.png",
+    },
+    repairs: {
+      alt: "Repair and maintenance homepage promo",
+      fallbackLabel: "Repair & Maintenance",
+      src: "/home-hero/repair-maintenance-promo.png",
+    },
+  };
 
   const benefitCards = [
     {
-      kicker: "Trust",
-      title: "Genuine Imported Products",
-      sub: "Authentic stock with warranty",
-      image: marketingImages.genuineProducts,
+      alt: "Promo card for Genuine Imported Products",
+      fallbackLabel: "Genuine Imported Products",
+      src: "/home-benefits/genuine-imported-products.png",
     },
     {
-      kicker: "Logistics",
-      title: "Countrywide Delivery",
-      sub: "Door to door, every county",
-      image: marketingImages.countrywideDelivery,
+      alt: "Promo card for Countrywide Delivery",
+      fallbackLabel: "Countrywide Delivery",
+      src: "/home-benefits/countrywide-delivery.png",
     },
     {
-      kicker: "Scale",
-      title: "Wholesale & Retail Supply",
-      sub: "From one piece to bulk orders",
-      image: marketingImages.wholesaleRetail,
+      alt: "Promo card for Wholesale and Retail Supply",
+      fallbackLabel: "Wholesale & Retail Supply",
+      src: "/home-benefits/wholesale-retail-supply.png",
     },
     {
-      kicker: "Service",
-      title: "Expert Repair Services",
-      sub: "Board-level technicians on staff",
-      image: marketingImages.expertRepairs,
+      alt: "Promo card for Expert Repair Services",
+      fallbackLabel: "Expert Repair Services",
+      src: "/home-benefits/expert-repair-services.png",
     },
   ];
 
-  const categoryCards = CATEGORIES.map((category) => ({
-    category,
-    image: getCategoryImage(category.slug),
-  }));
+  const categoryCards = CATEGORIES.filter(
+    (category) => category.slug !== "content-creator-kit",
+  ).map((category) => ({
+      category,
+      image: getCategoryImage(category.slug),
+    }));
 
   const serviceCards = SERVICES.slice(0, 6).map((service) => ({
     service,
@@ -69,116 +84,66 @@ export default function HomePage() {
     <SiteLayout>
       <section className="container-page pt-6">
         <div className="grid gap-5 lg:grid-cols-3">
-          <div className="relative flex min-h-[420px] flex-col justify-end overflow-hidden rounded-[28px] bg-gradient-to-br from-[oklch(0.22_0.04_260)] to-[oklch(0.1_0.03_260)] p-8 md:p-12 lg:col-span-2">
+          <Link
+            href="/products"
+            className="relative block aspect-[1717/916] overflow-hidden rounded-[28px] border border-beige-border bg-white lg:col-span-2"
+          >
             <RemoteImage
-              alt={marketingImages.homeHeroSecondary.alt}
+              alt={homeHeroPromos.main.alt}
               className="absolute inset-0"
-              fallbackLabel={marketingImages.homeHeroSecondary.fallbackLabel}
+              fallbackLabel={homeHeroPromos.main.fallbackLabel}
               imageClassName="object-cover object-center"
               priority
               sizes="(min-width: 1024px) 64vw, 100vw"
-              src={marketingImages.homeHeroSecondary.src}
+              src={homeHeroPromos.main.src}
             />
-            <div className="absolute inset-0 grid-bg opacity-10" />
-            <div className="relative max-w-xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cream/70">
-                Online Company Limited
-              </p>
-              <h1 className="mt-3 text-4xl font-extrabold leading-tight text-cream md:text-5xl">
-                Genuine Electronics, ICT Equipment &amp; Accessories
-              </h1>
-              <p className="mt-4 max-w-md text-cream/80">
-                Supplying laptops, phones, CCTV systems, printers, networking equipment, repair
-                services and bulk stock across Kenya.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link
-                  href="/products"
-                  className="inline-flex items-center gap-2 rounded-full bg-cream px-5 py-3 font-semibold text-navy transition hover:bg-white"
-                >
-                  Explore Products <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/quote"
-                  className="inline-flex items-center gap-2 rounded-full border border-cream/30 bg-white/10 px-5 py-3 font-semibold text-cream transition hover:bg-white/20"
-                >
-                  Request Bulk Quote
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="grid gap-5">
-            <div className="relative flex min-h-[200px] flex-col justify-end overflow-hidden rounded-[28px] bg-gradient-to-br from-[oklch(0.28_0.04_260)] to-[oklch(0.14_0.03_260)] p-7 text-cream">
+          </Link>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-5">
+            <Link
+              href="/bulk-supply"
+              className="relative block aspect-[1/1] overflow-hidden rounded-[24px] border border-beige-border bg-white lg:aspect-[2/1] lg:rounded-[28px]"
+            >
               <RemoteImage
-                alt={marketingImages.homeBulkCard.alt}
+                alt={homeHeroPromos.bulkSupply.alt}
                 className="absolute inset-0"
-                fallbackLabel={marketingImages.homeBulkCard.fallbackLabel}
-                imageClassName="object-cover"
-                sizes="(min-width: 1024px) 28vw, 100vw"
-                src={marketingImages.homeBulkCard.src}
+                fallbackLabel={homeHeroPromos.bulkSupply.fallbackLabel}
+                imageClassName="object-cover object-center"
+                sizes="(min-width: 1024px) 28vw, (min-width: 768px) 36vw, 48vw"
+                src={homeHeroPromos.bulkSupply.src}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/70 to-navy/30" />
-              <div className="relative z-10">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/70">
-                  Corporate &amp; Bulk Supply
-                </p>
-                <p className="mt-1 text-lg font-bold leading-snug">
-                  Reliable stock for shops, offices, schools and institutions.
-                </p>
-              </div>
-            </div>
-            <div className="relative flex min-h-[200px] flex-col justify-end overflow-hidden rounded-[28px] bg-gradient-to-br from-[oklch(0.55_0.18_30)] to-[oklch(0.32_0.16_30)] p-7 text-cream">
+            </Link>
+            <Link
+              href="/repairs"
+              className="relative block aspect-[1/1] overflow-hidden rounded-[24px] border border-beige-border bg-white lg:aspect-[2/1] lg:rounded-[28px]"
+            >
               <RemoteImage
-                alt={marketingImages.homeRepairsCard.alt}
+                alt={homeHeroPromos.repairs.alt}
                 className="absolute inset-0"
-                fallbackLabel={marketingImages.homeRepairsCard.fallbackLabel}
-                imageClassName="object-cover"
-                sizes="(min-width: 1024px) 28vw, 100vw"
-                src={marketingImages.homeRepairsCard.src}
+                fallbackLabel={homeHeroPromos.repairs.fallbackLabel}
+                imageClassName="object-cover object-center"
+                sizes="(min-width: 1024px) 28vw, (min-width: 768px) 36vw, 48vw"
+                src={homeHeroPromos.repairs.src}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-red/90 via-brand-red/65 to-brand-red/20" />
-              <div className="relative z-10">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/80">
-                  Repair &amp; Maintenance
-                </p>
-                <p className="mt-1 text-lg font-bold leading-snug">
-                  Phone, laptop, computer, printer and CCTV support.
-                </p>
-              </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="container-page mt-8">
-        <div className="overflow-hidden rounded-[26px] border border-beige-border bg-[oklch(0.95_0.03_60)]">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
           {benefitCards.map((item) => (
             <div
-              key={item.title}
-              className="flex items-center gap-3 px-4 py-4 not-last:border-b not-last:border-beige-border sm:px-5 lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr] lg:gap-0 lg:px-0 lg:py-0 lg:not-last:border-b-0 lg:not-last:border-r lg:not-last:border-beige-border"
+              key={item.src}
+              className="relative aspect-[3/2] overflow-hidden rounded-[18px] border border-beige-border bg-white md:rounded-[20px]"
             >
-              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl lg:mx-auto lg:h-12 lg:w-12">
-                <RemoteImage
-                  alt={item.image.alt}
-                  className="h-full w-full"
-                  fallbackLabel={item.image.fallbackLabel}
-                  imageClassName="object-cover"
-                  sizes="48px"
-                  src={item.image.src}
-                />
-              </div>
-              <div className="min-w-0 flex-1 lg:col-span-2 lg:px-5 lg:py-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-red">
-                  {item.kicker}
-                </p>
-                <h3 className="mt-1 text-sm font-bold leading-tight text-navy lg:text-base">
-                  {item.title}
-                </h3>
-                <p className="mt-1 text-xs text-muted-foreground">{item.sub}</p>
-              </div>
-              <div className="shrink-0 text-navy/40 lg:pr-5">
-                <ArrowRight className="h-4 w-4" />
-              </div>
+              <RemoteImage
+                alt={item.alt}
+                className="absolute inset-0"
+                fallbackLabel={item.fallbackLabel}
+                imageClassName="object-cover object-center"
+                sizes="(min-width: 1280px) 18rem, (min-width: 768px) 42vw, 100vw"
+                src={item.src}
+              />
             </div>
           ))}
         </div>

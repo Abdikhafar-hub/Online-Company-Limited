@@ -214,21 +214,6 @@ export const BRANCHES: Branch[] = [
     address: "Garissa Town Centre",
     phone: "+254 700 000 003",
   },
-  {
-    slug: "dadaab",
-    name: "Dadaab Branch",
-    city: "Dadaab",
-    address: "Dadaab Main Market",
-    phone: "+254 700 000 004",
-  },
-  { slug: "ifo", name: "Ifo Branch", city: "Ifo", address: "Ifo Town", phone: "+254 700 000 005" },
-  {
-    slug: "kismayo-link",
-    name: "Mombasa Pickup Point",
-    city: "Mombasa",
-    address: "Digo Road, Mombasa",
-    phone: "+254 700 000 006",
-  },
 ];
 
 export type CaseStudy = {
